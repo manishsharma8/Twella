@@ -1,20 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Search from './Search';
 
 const App = () => {
-	useEffect(() => {
-		const fetchTweet = async () => {
-			const res = await axios.get('/1450057833655902211');
-			console.log(res);
-		};
+	const [isLoading, setIsLoading] = useState(false);
 
+	useEffect(() => {
 		fetchTweet();
 	}, []);
 
+	const fetchTweet = async (id) => {
+		setIsLoading(true);
+		const res = await axios.get(`/${id}`);
+		setIsLoading(false);
+	};
+
 	return (
-		<div>
-			<Search />
+		<div className="m-10">
+			<Search fetchTweet={fetchTweet} />
 		</div>
 	);
 };
