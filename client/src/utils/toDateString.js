@@ -17,11 +17,13 @@ export function toDateString(props) {
 	let dateString = '';
 
 	const d = new Date(props);
-	const hours = d.getHours();
-	const min = d.getMinutes();
-	const date = d.getDate();
-	const month = monthNames[d.getMonth()];
-	const year = d.getFullYear();
+	let hours = d.getHours();
+	let min = d.getMinutes();
+	let date = d.getDate();
+	let month = monthNames[d.getMonth()];
+	let year = d.getFullYear();
+
+	if (min < 10) min = '0' + min;
 
 	if (hours > 12) {
 		dateString += (hours - 12).toString() + ':' + min + ' PM';
