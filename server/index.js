@@ -30,7 +30,7 @@ async function getRequest(id) {
 	}
 }
 
-app.get('/:id', async (req, res) => {
+app.get('/api/:id', async (req, res) => {
 	const response = await getRequest(req.params.id);
 	res.send(response);
 });

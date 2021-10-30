@@ -9,7 +9,7 @@ const Search = ({ fetchTweet }) => {
 	return (
 		<div
 			onKeyDown={onEnterHandler}
-			className="flex mx-auto w-3/6 px-5 py-4 bg-gray-700 bg-opacity-40 text-gray-400 rounded-lg border border-gray-700 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:text-gray-200"
+			className="flex mx-auto w-5/12 px-5 py-3 bg-gray-700 bg-opacity-40 text-gray-400 rounded-lg border border-gray-700 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:text-gray-200"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
