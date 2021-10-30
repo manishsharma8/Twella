@@ -13,7 +13,7 @@ const monthNames = [
 	'Dec',
 ];
 
-export function toDateString(props) {
+export function toDateString(props, type) {
 	let dateString = '';
 
 	const d = new Date(props);
@@ -33,5 +33,6 @@ export function toDateString(props) {
 	dateString += ' · ';
 	dateString += date + ' ' + month + ', ' + year;
 
-	return dateString;
+	if (type === 1) return dateString;
+	else return ' · ' + date + ' ' + month;
 }
