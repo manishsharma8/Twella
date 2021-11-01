@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {alterImageQuality} from '../utils/alterImageQuality'
 import { toDateString } from '../utils/toDateString';
 
 const ReferencedCard = ({ id }) => {
@@ -32,7 +33,7 @@ const ReferencedCard = ({ id }) => {
 			<div className="flex">
 				<img
 					className="rounded-full w-7 h-7"
-					src={data.includes.users[0].profile_image_url}
+					src={alterImageQuality(data.includes.users[0].profile_image_url)}
 					alt="referencedtweetprofileimage"
 				/>
 				<span className="ml-2 font-medium my-auto">
