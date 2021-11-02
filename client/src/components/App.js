@@ -1,60 +1,63 @@
 import { useEffect, useRef, useState } from 'react';
+import * as htmlToImage from 'html-to-image';
 import axios from 'axios';
+
 import Search from './Search';
 import Card from './Card';
 import ActionDrawer from './ActionDrawer';
-import html2canvas from 'html2canvas';
+
+const colors = [
+	'from-yellow-400 via-red-500 to-pink-500',
+	'from-blue-400 to-blue-600',
+	'from-purple-400 to-blue-600',
+	'from-yellow-400 to-green-600',
+	'from-purple-200 to-blue-400',
+	'from-pink-600 to-gray-900',
+];
 
 const App = () => {
 	const [data, setData] = useState([]);
+	const [selectedColor, setSelectedColor] = useState(colors[0]);
 	const printRef = useRef();
-	// const [errors, setErrors] = useState([]);
-	// const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		let id = `1450094859688103941`;
+		let id = `1028131675602079747`;
 		fetchTweet(id);
 	}, []);
 
 	const fetchTweet = async (id) => {
-		// setIsLoading(true);
 		const { data } = await axios.get(`api/${id}`);
 		if (!data.errors) {
 			setData(data);
-			// setErrors([]);
 		} else {
-			// setErrors(data.errors);
 		}
-		// setIsLoading(false);
 	};
 
-	const handleImageDownload = async () => {
+	const handleChangeColor = (colorString) => {
+		setSelectedColor(colorString);
+	};
+
+	const handleImageDownload = () => {
 		const element = printRef.current;
-		console.log(element);
-		const canvas = await html2canvas(element, {
-			allowTaint: true,
-			useCORS: true,
-		});
-
-		const data = canvas.toDataURL('image/png');
-		const link = document.createElement('a');
-		if (typeof link.download === 'string') {
-			link.href = data;
-			link.download = 'image.png';
-
-			document.body.appendChild(link);
+		htmlToImage.toPng(element).then(function (dataUrl) {
+			var link = document.createElement('a');
+			link.download = 'my-image-name.png';
+			link.href = dataUrl;
 			link.click();
-			document.body.removeChild(link);
-		} else {
-			window.open(data);
-		}
+		});
 	};
 
 	return (
 		<div className="m-10">
 			<Search fetchTweet={fetchTweet} />
-			{data.data && <Card forwardRef={printRef} data={data} />}
-			<ActionDrawer handleImageDownload={handleImageDownload} />
+			{data.data && (
+				<Card forwardRef={printRef} color={selectedColor} data={data} />
+			)}
+			<ActionDrawer
+				colors={colors}
+				handleChangeColor={handleChangeColor}
+				handleImageDownload={handleImageDownload}
+			/>
 		</div>
 	);
 };

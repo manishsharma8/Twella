@@ -6,7 +6,7 @@ import Media from './Media';
 import ReferencedCard from './ReferencedCard';
 import Stats from './Stats';
 
-const Card = ({ data, forwardRef }) => {
+const Card = ({ data, color, forwardRef }) => {
 	const NewlineText = ({ text }) => {
 		let pattern = /http\S+/;
 		text = text.replace(pattern, '');
@@ -17,8 +17,9 @@ const Card = ({ data, forwardRef }) => {
 	return (
 		<div className="rounded-xl overflow-hidden w-3/5 mx-auto my-10">
 			<div
+				id="card"
 				ref={forwardRef}
-				className="py-10 px-14 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
+				className={`py-10 px-14 bg-gradient-to-r ${color}`}
 			>
 				<div
 					style={{
@@ -72,8 +73,3 @@ const Card = ({ data, forwardRef }) => {
 };
 
 export default Card;
-
-// style={{
-//     backgroundImage:
-//         'linear-gradient(330deg, rgb(255, 25, 125), rgb(45, 13, 255), rgb(0, 255, 179))',
-// }}

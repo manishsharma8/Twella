@@ -1,8 +1,11 @@
-const ActionDrawer = ({ handleImageDownload }) => {
+import ColorPopover from './bottomTray/ColorPopover';
+
+const ActionDrawer = ({ handleImageDownload, colors, handleChangeColor }) => {
 	return (
-		<div className="flex mx-auto bg-gray-700 bg-opacity-40 text-gray-300 w-1/2 p-3 rounded-lg">
+		<div className="grid grid-cols-6 mx-auto bg-gray-700 bg-opacity-40 text-gray-300 w-1/2 p-1.5 rounded-lg gap-2">
+			<ColorPopover colors={colors} handleChangeColor={handleChangeColor} />
 			<button
-				onClick={handleImageDownload}
+				onClick={() => handleImageDownload()}
 				className="bg-blue-500 rounded-lg px-3 py-2"
 			>
 				<svg
