@@ -31,7 +31,7 @@ async function getRequest(id) {
 	}
 }
 
-app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use(express.static(path.resolve(__dirname, 'client/build')));
 
 app.get('/api/:id', async (req, res) => {
 	const response = await getRequest(req.params.id);
