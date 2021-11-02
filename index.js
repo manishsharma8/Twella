@@ -46,4 +46,6 @@ app.get('*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
-app.listen(4000, () => console.log('App listening to port 4000'));
+app.listen(process.env.PORT || 4000, () =>
+	console.log('App listening to port 4000')
+);
