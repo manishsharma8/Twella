@@ -31,7 +31,7 @@ async function getRequest(id) {
 	}
 }
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.get('/api/:id', async (req, res) => {
 	const response = await getRequest(req.params.id);
@@ -43,7 +43,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
 app.listen(4000, () => console.log('App listening to port 4000'));
