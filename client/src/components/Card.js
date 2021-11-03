@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { alterImageQuality } from '../utils/alterImageQuality';
 import { toDateString } from '../utils/toDateString';
 
@@ -6,7 +5,7 @@ import Media from './Media';
 import ReferencedCard from './ReferencedCard';
 import Stats from './Stats';
 
-const Card = ({ data, color, forwardRef, cardLight }) => {
+const Card = ({ data, color, forwardRef, cardLight, showStats }) => {
 	const NewlineText = ({ text }) => {
 		let pattern = /http\S+/;
 		text = text.replace(pattern, '');
@@ -23,12 +22,8 @@ const Card = ({ data, color, forwardRef, cardLight }) => {
 	}
 
 	return (
-		<div className="rounded-xl overflow-hidden w-3/5 mx-auto my-10">
-			<div
-				id="card"
-				ref={forwardRef}
-				className={`py-10 px-14 bg-gradient-to-r ${color}`}
-			>
+		<div className="rounded-xl overflow-hidden w-3/5 mx-auto my-12 shadow-2xl">
+			<div ref={forwardRef} className={`py-10 px-14 bg-gradient-to-r ${color}`}>
 				<div
 					style={{
 						backgroundImage: gradient,
@@ -77,12 +72,20 @@ const Card = ({ data, color, forwardRef, cardLight }) => {
 					</div>
 					{data.includes.media && <Media medium={data.includes.media} />}
 					{data.data[0].referenced_tweets && (
-						<ReferencedCard cardLight={cardLight} id={data.data[0].referenced_tweets[0].id} />
+						<ReferencedCard
+							cardLight={cardLight}
+							id={data.data[0].referenced_tweets[0].id}
+						/>
 					)}
 					<div className="text-base mt-2 text-gray-400">
 						{toDateString(data.data[0].created_at, 1)}
 					</div>
-					<Stats cardLight={cardLight} metrics={data.data[0].public_metrics} />
+					{showStats ? (
+						<Stats
+							cardLight={cardLight}
+							metrics={data.data[0].public_metrics}
+						/>
+					) : null}
 				</div>
 			</div>
 		</div>

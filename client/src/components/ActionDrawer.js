@@ -3,12 +3,13 @@ import ColorPopover from './bottomTray/ColorPopover';
 const ActionDrawer = ({
 	handleImageDownload,
 	toggleCardColor,
+	toggleShowStats,
 	colors,
 	selectedColor,
 	handleChangeColor,
 }) => {
 	return (
-		<div className="grid grid-cols-7 mx-auto bg-gray-700 bg-opacity-40 text-gray-300 w-1/2 p-1.5 rounded-lg gap-0.5">
+		<div className="fixed left-0 right-0 bottom-16 grid grid-cols-6 mx-auto border border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 w-1/2 p-1.5 rounded-lg gap-0.5">
 			<ColorPopover
 				colors={colors}
 				selectedColor={selectedColor}
@@ -28,6 +29,26 @@ const ActionDrawer = ({
 				</svg>
 				<div className="mx-auto text-gray-500 group-hover:text-gray-300">
 					Card
+				</div>
+			</button>
+			<button
+				onClick={() => toggleShowStats()}
+				className="rounded-lg px-3 py-2 hover:bg-gray-700 grid grid-cols-1 text-center group"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-9 mx-auto"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+				>
+					<path
+						fillRule="evenodd"
+						d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+						clipRule="evenodd"
+					/>
+				</svg>
+				<div className="mx-auto text-gray-500 group-hover:text-gray-300">
+					Response
 				</div>
 			</button>
 			<button

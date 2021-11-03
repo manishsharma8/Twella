@@ -19,6 +19,7 @@ const App = () => {
 	const [data, setData] = useState([]);
 	const [selectedColor, setSelectedColor] = useState(colors[0]);
 	const [cardLight, setCardLight] = useState(true);
+	const [showStats, setShowStats] = useState(true);
 	const printRef = useRef();
 
 	useEffect(() => {
@@ -42,6 +43,10 @@ const App = () => {
 		setCardLight(!cardLight);
 	};
 
+	const toggleShowStats = () => {
+		setShowStats(!showStats);
+	};
+
 	const handleImageDownload = () => {
 		const element = printRef.current;
 		htmlToImage.toPng(element).then(function (dataUrl) {
@@ -53,10 +58,11 @@ const App = () => {
 	};
 
 	return (
-		<div className="m-10">
+		<div className="m-10 relative h-screen">
 			<Search fetchTweet={fetchTweet} />
 			{data.data && (
 				<Card
+					showStats={showStats}
 					cardLight={cardLight}
 					forwardRef={printRef}
 					color={selectedColor}
@@ -68,6 +74,7 @@ const App = () => {
 				toggleCardColor={toggleCardColor}
 				selectedColor={selectedColor}
 				handleChangeColor={handleChangeColor}
+				toggleShowStats={toggleShowStats}
 				handleImageDownload={handleImageDownload}
 			/>
 		</div>
