@@ -6,13 +6,21 @@ import Media from './Media';
 import ReferencedCard from './ReferencedCard';
 import Stats from './Stats';
 
-const Card = ({ data, color, forwardRef }) => {
+const Card = ({ data, color, forwardRef, cardLight }) => {
 	const NewlineText = ({ text }) => {
 		let pattern = /http\S+/;
 		text = text.replace(pattern, '');
 		const newText = text.split('\n').map((str) => <p>{str}</p>);
 		return newText;
 	};
+
+	let gradient;
+	if (cardLight) {
+		gradient =
+			'linear-gradient(-50deg,rgba(255,255,255,.5),rgba(255,255,255,.95) 80%';
+	} else {
+		gradient = 'linear-gradient(-50deg,rgba(0,0,0,.94),rgba(0,0,0,.58) 100%)';
+	}
 
 	return (
 		<div className="rounded-xl overflow-hidden w-3/5 mx-auto my-10">
@@ -23,11 +31,12 @@ const Card = ({ data, color, forwardRef }) => {
 			>
 				<div
 					style={{
-						backgroundImage:
-							'linear-gradient(-50deg,rgba(255,255,255,.5),rgba(255,255,255,.95) 80%)',
+						backgroundImage: gradient,
 						fontSize: '22px',
 					}}
-					className="backdrop-blur-xl border border-gray-300 rounded-xl py-6 px-10 shadow-2xl"
+					className={`backdrop-blur-xl border ${
+						cardLight ? 'border-gray-300' : 'border-gray-600'
+					} rounded-xl py-6 px-10 shadow-2xl`}
 				>
 					<div className="flex gap-3 mb-4">
 						<img
@@ -37,7 +46,11 @@ const Card = ({ data, color, forwardRef }) => {
 						/>
 						<div className="text-base flex flex-col leading-snug">
 							<div className="flex gap-2">
-								<span className="font-bold">{data.includes.users[0].name}</span>
+								<span
+									className={`font-bold ${cardLight ? '' : 'text-gray-200'}`}
+								>
+									{data.includes.users[0].name}
+								</span>
 								{data.includes.users[0].verified ? (
 									<svg
 										className="my-auto w-5 h-5 text-blue-400"
@@ -55,17 +68,21 @@ const Card = ({ data, color, forwardRef }) => {
 							</span>
 						</div>
 					</div>
-					<div className="text-gray-700 leading-relaxed">
+					<div
+						className={`leading-relaxed ${
+							cardLight ? 'text-gray-700' : 'text-gray-300'
+						}`}
+					>
 						<NewlineText text={data.data[0].text} />
 					</div>
 					{data.includes.media && <Media medium={data.includes.media} />}
 					{data.data[0].referenced_tweets && (
-						<ReferencedCard id={data.data[0].referenced_tweets[0].id} />
+						<ReferencedCard cardLight={cardLight} id={data.data[0].referenced_tweets[0].id} />
 					)}
 					<div className="text-base mt-2 text-gray-400">
 						{toDateString(data.data[0].created_at, 1)}
 					</div>
-					<Stats metrics={data.data[0].public_metrics} />
+					<Stats cardLight={cardLight} metrics={data.data[0].public_metrics} />
 				</div>
 			</div>
 		</div>

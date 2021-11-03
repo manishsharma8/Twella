@@ -18,6 +18,7 @@ const colors = [
 const App = () => {
 	const [data, setData] = useState([]);
 	const [selectedColor, setSelectedColor] = useState(colors[0]);
+	const [cardLight, setCardLight] = useState(true);
 	const printRef = useRef();
 
 	useEffect(() => {
@@ -37,6 +38,10 @@ const App = () => {
 		setSelectedColor(colorString);
 	};
 
+	const toggleCardColor = () => {
+		setCardLight(!cardLight);
+	};
+
 	const handleImageDownload = () => {
 		const element = printRef.current;
 		htmlToImage.toPng(element).then(function (dataUrl) {
@@ -51,10 +56,17 @@ const App = () => {
 		<div className="m-10">
 			<Search fetchTweet={fetchTweet} />
 			{data.data && (
-				<Card forwardRef={printRef} color={selectedColor} data={data} />
+				<Card
+					cardLight={cardLight}
+					forwardRef={printRef}
+					color={selectedColor}
+					data={data}
+				/>
 			)}
 			<ActionDrawer
 				colors={colors}
+				toggleCardColor={toggleCardColor}
+				selectedColor={selectedColor}
 				handleChangeColor={handleChangeColor}
 				handleImageDownload={handleImageDownload}
 			/>
