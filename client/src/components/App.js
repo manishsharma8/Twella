@@ -5,6 +5,7 @@ import axios from 'axios';
 import Search from './Search';
 import Card from './Card';
 import ActionDrawer from './ActionDrawer';
+import Navbar from './Navbar';
 
 const colors = [
 	'from-yellow-400 via-red-500 to-pink-500',
@@ -59,7 +60,7 @@ const App = () => {
 
 	return (
 		<div className="m-10 relative h-screen">
-			<Search fetchTweet={fetchTweet} />
+			<Navbar fetchTweet={fetchTweet} />
 			{data.data && (
 				<Card
 					showStats={showStats}
