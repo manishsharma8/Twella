@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import * as htmlToImage from 'html-to-image';
 import axios from 'axios';
 
-import Search from './Search';
 import Card from './Card';
 import ActionDrawer from './ActionDrawer';
 import Navbar from './Navbar';
@@ -59,7 +58,7 @@ const App = () => {
 	};
 
 	return (
-		<div className="m-10 relative h-screen">
+		<div className="m-10 relative min-h-screen">
 			<Navbar fetchTweet={fetchTweet} />
 			{data.data && (
 				<Card
