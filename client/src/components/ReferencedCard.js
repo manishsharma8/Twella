@@ -18,9 +18,11 @@ const ReferencedCard = ({ id, cardLight }) => {
 	const NewlineText = ({ text }) => {
 		let pattern = /http\S+/;
 		text = text.replace(pattern, '');
-		const newText = text
-			.split('\n')
-			.map((str) => <p className="leading-relaxed">{str}</p>);
+		const newText = text.split('\n').map((str, index) => (
+			<p key={index} className="leading-relaxed">
+				{str}
+			</p>
+		));
 
 		return newText;
 	};

@@ -6,22 +6,33 @@ import Media from './Media';
 import ReferencedCard from './ReferencedCard';
 import Stats from './Stats';
 import Icon from './icons/Icon';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+
+function useStateRef(processNode) {
+	const [node, setNode] = useState(null);
+	const setRef = useCallback(
+		(newNode) => {
+			setNode(processNode(newNode));
+		},
+		[processNode]
+	);
+	return [node, setRef];
+}
 
 const Card = ({ data, color, forwardRef, cardLight, showStats }) => {
 	const [width, setWidth] = useState(0);
 	const [height, setHeight] = useState(0);
-	const [minWidth, setMinWidth] = useState(0);
-	const cardEle = useRef(null);
+	const [minHeight, setMinHeight] = useState(0);
+	const [refHeight, setRef] = useStateRef((node) => node?.clientHeight || 0);
 
 	useEffect(() => {
-		setMinWidth(cardEle.current.offsetHeight);
-	}, []);
+		setMinHeight(refHeight);
+	}, [refHeight]);
 
 	const NewlineText = ({ text }) => {
 		let pattern = /http\S+/;
 		text = text.replace(pattern, '');
-		const newText = text.split('\n').map((str) => <p>{str}</p>);
+		const newText = text.split('\n').map((str, index) => <p key={index}>{str}</p>);
 		return newText;
 	};
 
@@ -47,7 +58,7 @@ const Card = ({ data, color, forwardRef, cardLight, showStats }) => {
 				defaultSize={{ width: 700 }}
 				maxWidth={1100}
 				minWidth={550}
-				minHeight={minWidth + 70}
+				minHeight={minHeight + 80}
 				handleStyles={{
 					left: {
 						position: 'absolute',
@@ -102,7 +113,7 @@ const Card = ({ data, color, forwardRef, cardLight, showStats }) => {
 								fontSize: '22px',
 								maxWidth: '600px',
 							}}
-							ref={cardEle}
+							ref={setRef}
 							className={`my-auto w-full backdrop-blur-xl border mx-auto rounded-xl py-6 px-10 shadow-2xl ${
 								cardLight ? 'border-gray-300' : 'border-gray-600'
 							}`}

@@ -7,9 +7,9 @@ import ActionDrawer from './ActionDrawer';
 import Navbar from './Navbar';
 
 const colors = [
+	'from-purple-400 to-blue-600',
 	'from-yellow-400 via-red-500 to-pink-500',
 	'from-blue-400 to-blue-600',
-	'from-purple-400 to-blue-600',
 	'from-yellow-400 to-green-600',
 	'from-purple-200 to-blue-400',
 	'from-pink-600 to-gray-900',

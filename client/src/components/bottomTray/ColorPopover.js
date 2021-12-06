@@ -1,4 +1,4 @@
-import { Popover, Transition } from '@headlessui/react';
+import { Popover } from '@headlessui/react';
 
 const ColorPopover = ({ colors, selectedColor, handleChangeColor }) => {
 	if (colors) {
@@ -20,6 +20,7 @@ const ColorPopover = ({ colors, selectedColor, handleChangeColor }) => {
 						{colors.map((color) => {
 							return (
 								<button
+									key={color}
 									onClick={() => handleChangeColor(color)}
 									className={`bg-gradient-to-br ${color} border-2 border-gray-700 hover:border-gray-50 transition ease-in duration-200 rotate-45 rounded-lg h-11 w-11`}
 								></button>

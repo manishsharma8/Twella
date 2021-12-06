@@ -35,6 +35,7 @@ const Media = ({ medium }) => {
 				{medium.map((media, index) => {
 					return (
 						<div
+							key={media.media_key}
 							className={`bg-cover bg-center bg-no-repeat ${
 								index === 0 && mediaSize === 3 ? 'row-span-2' : ''
 							}`}
