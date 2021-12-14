@@ -10,7 +10,7 @@ const ActionDrawer = ({
 	handleChangeColor,
 }) => {
 	return (
-		<div className="fixed left-0 right-0 bottom-16 grid grid-cols-3 gap-6 divide-x-2 divide-gray-700 mx-auto border border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 w-2/5 p-1.5 rounded-xl">
+		<div className="fixed left-0 right-0 bottom-16 grid grid-cols-3 gap-6 divide-x-2 divide-gray-700 mx-auto border border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 w-4/5 sm:w-3/5 md:w-2/5 p-1.5 rounded-xl">
 			<div className="grid grid-cols-3 col-start-1 col-end-3">
 				<ColorPopover
 					colors={colors}
@@ -39,7 +39,7 @@ const ActionDrawer = ({
 			<div className="w-full">
 				<button
 					onClick={() => handleImageDownload()}
-					className="bg-blue-500 ml-6 w-4/5 rounded-lg px-3 py-2 text-sm"
+					className="bg-blue-500 ml-3 sm:ml-4 lg:ml-6 w-4/5 rounded-lg px-3 py-2 text-sm"
 				>
 					<Icon name="download" />
 					Download
