@@ -2,7 +2,7 @@ import { nFormatter } from '../utils/nFormatter';
 
 const Stats = ({ metrics, cardLight }) => {
 	return (
-		<div className="flex gap-10 mt-4 text-base text-gray-400">
+		<div className="flex gap-10 mt-6 text-base text-gray-400">
 			<div>
 				<span
 					className={`${

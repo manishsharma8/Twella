@@ -22,17 +22,12 @@ const App = () => {
 	const [showStats, setShowStats] = useState(true);
 	const printRef = useRef();
 
-	useEffect(() => {
-		let id = `1028131675602079747`;
-		fetchTweet(id);
-	}, []);
-
 	const fetchTweet = async (id) => {
 		const { data } = await axios.get(`api/${id}`);
 		if (!data.errors) {
 			setData(data);
-		} else {
 		}
+		console.log(data);
 	};
 
 	const handleChangeColor = (colorString) => {
@@ -60,15 +55,13 @@ const App = () => {
 	return (
 		<div className="m-10 relative min-h-screen">
 			<Navbar fetchTweet={fetchTweet} />
-			{data.data && (
-				<Card
-					showStats={showStats}
-					cardLight={cardLight}
-					forwardRef={printRef}
-					color={selectedColor}
-					data={data}
-				/>
-			)}
+			<Card
+				showStats={showStats}
+				cardLight={cardLight}
+				forwardRef={printRef}
+				color={selectedColor}
+				data={data}
+			/>
 			<ActionDrawer
 				colors={colors}
 				toggleCardColor={toggleCardColor}
